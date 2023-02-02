@@ -1,4 +1,18 @@
 import axios from 'axios'
+import VueRouter from 'vue-router'
+import StudentInfo from '../components/StudentInfo.vue'
+import Students from '../components/Students.vue'
+
+Vue.use(VueRouter)
+
+const routes = [
+  { path: '/', component: Students },
+  { path: '/student/:_id', component: StudentInfo, props: true }
+]
+
+const router = new VueRouter({
+  routes
+})
 
 var app = new Vue({
   el: '#app',
@@ -46,5 +60,7 @@ var app = new Vue({
       cancelEditing() {
       this.editingStudent = null
       }
-      }
+      },
+      router
+
 });

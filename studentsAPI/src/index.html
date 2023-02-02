@@ -11,40 +11,40 @@
 <body>
  
   <div id="app">
-    <form @submit.prevent="addStudent">
-      <input type="text" v-model="newStudent.name" placeholder="name">
-      <input type="text" v-model="newStudent.group" placeholder="group">
-      <input type="text" v-model="newStudent.photo" placeholder="photo">
-      <input type="checkbox" v-model="newStudent.mark" placeholder="mark">
+    <form @submit.prevent="addStudent" v-if="!editingStudent">
+      <input type="text" v-model="newStudent.name" placeholder="Full Name">
+      <input type="text" v-model="newStudent.group" placeholder="Group">
+      <input type="text" v-model="newStudent.mark" placeholder="Mark">
+      <input type="checkbox" v-model="newStudent.isDonePr" placeholder="IsDonePr">
       <button>Add</button>
     </form>
     <form @submit.prevent="updateStudent" v-if="editingStudent">
-      <input type="text" v-model="editingStudent.name" placeholder="name">
-      <input type="text" v-model="editingStudent.group" placeholder="group">
-      <input type="text" v-model="editingStudent.photo" placeholder="photo">
-      <input type="checkbox" v-model="editingStudent.mark" placeholder="mark">
-      <button>save</button>
-      <button @click="cancelEditing">cancel</button>
+      <input type="text" v-model="editingStudent.name" placeholder="Full Name">
+      <input type="text" v-model="editingStudent.group" placeholder="Group">
+      <input type="text" v-model="editingStudent.mark" placeholder="Mark">
+      <input type="checkbox" v-model="editingStudent.isDonePr" placeholder="IsDonePr">
+      <button>Save</button>
+      <button @click="cancelEditing">Cancel</button>
     </form>
     <table>
       <thead>
         <tr>
-          <th>name</th>
-          <th>group</th>
-          <th>photo</th>
-          <th>mark</th>
-          <th>action</th>
+          <th>Full Name</th>
+          <th>Group</th>
+          <th>Mark</th>
+          <th>IsDonePr</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="student in students" :key="student._id" :class="{ highlighted: student.mark }">
+        <tr v-for="student in students" :key="student._id" :class="{ highlighted: student.isDonePr }">
           <td>{{ student.name }}</td>
           <td>{{ student.group }}</td>
-          <td>{{ student.photo }}</td>
           <td>{{ student.mark }}</td>
+          <td>{{ student.isDonePr }}</td>
           <td>
             <a @click="editStudent(student)">Edit</a>
-            <a @click="deleteStudent(student._id)">delete</a>
+            <a @click="deleteStudent(student._id)">Delete</a>
           </td>
         </tr>
       </tbody>
@@ -57,6 +57,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="main.js"></script>
+  <script type="module" src="gg.js"></script>
 
 
 </body>

@@ -1,29 +1,35 @@
 <template>
     <div>
+      <router-link to="/">Back to students list</router-link>
       <h2>Student Information</h2>
-      <p>name: {{ student.name }}</p>
-      <p>group: {{ student.group }}</p>
-      <p>photo: {{ student.photo }}</p>
-      <p>mark: {{ student.mark }}</p>
+      <p>Name: {{ student.name }}</p>
+      <p>Group: {{ student.group }}</p>
+      <p>Mark: {{ student.mark }}</p>
     </div>
-</template>
-
+  </template>
+  
   <script>
-  import VueRouter from 'vue-router'
+  import axios from 'axios'
+  
   export default {
     props: ['_id'],
+    computed: {
+      student() {
+        return this.students.find(student => student._id === this._id)
+      }
+    },
     data() {
       return {
-        student: {}
+        students: []
       }
     },
     mounted() {
-      this.getStudent()
+      this.getStudents()
     },
     methods: {
-      async getStudent() {
-        const response = await axios.get(`http://34.82.81.113:3000/students/${this._id}`)
-        this.student = response.data
+      async getStudents() {
+        const response = await axios.get('http://34.82.81.113:3000/students')
+        this.students = response.data
       }
     }
   }

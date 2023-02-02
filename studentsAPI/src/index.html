@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  
+  <title>Document</title>
+</head>
+<body>
+ 
+  <div id="app">
+    <form @submit.prevent="addStudent">
+      <input type="text" v-model="newStudent.name" placeholder="name">
+      <input type="text" v-model="newStudent.group" placeholder="group">
+      <input type="text" v-model="newStudent.photo" placeholder="photo">
+      <input type="checkbox" v-model="newStudent.mark" placeholder="mark">
+      <button>Add</button>
+    </form>
+    <form @submit.prevent="updateStudent" v-if="editingStudent">
+      <input type="text" v-model="editingStudent.name" placeholder="name">
+      <input type="text" v-model="editingStudent.group" placeholder="group">
+      <input type="text" v-model="editingStudent.photo" placeholder="photo">
+      <input type="checkbox" v-model="editingStudent.mark" placeholder="mark">
+      <button>save</button>
+      <button @click="cancelEditing">cancel</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>group</th>
+          <th>photo</th>
+          <th>mark</th>
+          <th>action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="student in students" :key="student._id" :class="{ highlighted: student.mark }">
+          <td>{{ student.name }}</td>
+          <td>{{ student.group }}</td>
+          <td>{{ student.photo }}</td>
+          <td>{{ student.mark }}</td>
+          <td>
+            <a @click="editStudent(student)">Edit</a>
+            <a @click="deleteStudent(student._id)">delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="main.js"></script>
+
+
+</body>
+</html>

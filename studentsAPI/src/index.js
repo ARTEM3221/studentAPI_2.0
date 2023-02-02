@@ -1,7 +1,7 @@
-import axios from 'axios'
 import VueRouter from 'vue-router'
-import StudentInfo from '../components/StudentInfo.vue'
+import axios from 'axios'
 import Students from '../components/Students.vue'
+import StudentInfo from '../components/StudentInfo.vue'
 
 Vue.use(VueRouter)
 
@@ -15,15 +15,19 @@ const router = new VueRouter({
 })
 
 var app = new Vue({
+  router,
   el: '#app',
+  render: function(h) {
+    
+  },
   data() {
     return {
       students: [],
       newStudent: {
         name: '',
         group: '',
-        mark: '',
-        isDonePr: false
+        photo: '',
+        mark: false
       },
       editingStudent: null
     }
@@ -32,35 +36,35 @@ var app = new Vue({
     this.getStudents()
   },
   methods: {
-
     async getStudents() {
       const response = await axios.get('http://34.82.81.113:3000/students')
       this.students = response.data
     },
-
     async deleteStudent(_id) {
-      await axios.delete(`http://34.82.81.113:3000/students/${_id}`) 
-      this.getStudents() 
-    }, 
-    
-    async addStudent() { const response = await axios.post('http://34.82.81.113:3000/students', 
-    this.newStudent) 
-    this.students.push(response.data) 
-    this.newStudent = { name: '', group: '', mark: '', isDonePr: false } 
-  }, 
-  async updateStudent() { 
-    await axios.put(`http://34.82.81.113:3000/students/${this.editingStudent._id}`, 
-    this.editingStudent)
+      await axios.delete(`http://34.82.81.113:3000/students/${_id}`)
+      this.getStudents()
+    },
+      async addStudent() {
+         const response = await axios.post('http://34.82.81.113:3000/students', this.newStudent) 
+         this.students.push(response.data) 
+         this.newStudent = { 
+        name: '',
+        group: '',
+        photo: '',
+        mark: false 
+        } 
+      }, 
+      async updateStudent() {
+      await axios.put(`http://34.82.81.113:3000/students/${this.editingStudent._id}`, 
+      this.editingStudent)
       this.getStudents()
       this.editingStudent = null
-      },
-      editStudent(student) {
+    },
+    editStudent(student) {
       this.editingStudent = student
       },
       cancelEditing() {
       this.editingStudent = null
       }
-      },
-      router
-
+  }
 });

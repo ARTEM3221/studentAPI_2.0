@@ -1,25 +1,9 @@
-import VueRouter from 'vue-router'
+
 import axios from 'axios'
-import Students from '../components/Students.vue'
-import StudentInfo from '../components/StudentInfo.vue'
 
-Vue.use(VueRouter)
-
-const routes = [
-  { path: '/', component: Students },
-  { path: '/student/:_id', component: StudentInfo, props: true }
-]
-
-const router = new VueRouter({
-  routes
-})
 
 var app = new Vue({
-  router,
   el: '#app',
-  render: function(h) {
-    
-  },
   data() {
     return {
       students: [],

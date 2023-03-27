@@ -10,7 +10,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+<<<<<<< HEAD
     "vue-loader": "^17.0.1",
+=======
+    "babel-core": "^6.26.3",
+    "babel-loader": "^9.1.2",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^6.7.3",
+    "vue-loader": "^17.0.1",
+    "vue-style-loader": "^4.1.3",
+>>>>>>> 0f5d9839de1a0cee86baa6340c3ed388f61ea7d1
     "vue-template-compiler": "^2.7.14",
     "webpack-dev-server": "^4.11.1"
   },
